@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+    <head>
+        <title>calculadora</title>
+        <style>
+            .corpo {
+                background-color: grey;
+                width: 128px;
+                height: 170px;
+                margin-top: 30px;
+                margin-left: 30px;
+            }
+            .corpo button{
+                width: 32px;
+                height: 16px;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+            .tela p{
+                background-color: bisque;
+                text-align: right;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        </style>
+    </head>
+    <h1>Calculadora</h1>
+    <div class='corpo'>
+        <div class='tela'>
+            <p class='sinal'> .</p>
+            <p class='numero'>0</p>
+        </div>
+        <button>C</button><button>?</button><button>?</button><button>+</button><br>
+        <button>1</button><button>2</button><button>3</button><button>-</button><br>
+        <button>4</button><button>5</button><button>6</button><button>x</button><br>
+        <button>7</button><button>8</button><button>9</button><button>/</button><br>
+        <button>?</button><button>0</button><button>?</button><button>=</button>
+    </div>
+    <script>
+        //20buttons
+        let btns = document.querySelectorAll('button');
+        let telaSinal = document.querySelector('.sinal');
+        let telap = document.querySelector('.numero');
+        let num = [0, 0];// valor [0] inicial [1] aux
+        let sinal = '';//sinal
+        for (let i = 0; i < btns.length; i++) {
+            const element = btns[i].addEventListener('click', calculador);
+        }
+        function calculador(){
+            switch(this.textContent){
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    if(telap.textContent == '0') telap.textContent = this.textContent;
+                    else                         telap.textContent += this.textContent;
+                    break;
+                case 'C':
+                    calcAux = [0, 0];
+                    sinal = '';
+                    telaSinal.textContent = ` .`;
+                    telap.textContent = '0';
+                    break;
+                case '+':
+                case '-':
+                case 'x':
+                case '/':
+                    if(sinal == '') {
+                        sinal = this.textContent;
+                        telaSinal.textContent = sinal;
+                        num[0] = Number(telap.textContent);
+                        telap.textContent='0';
+                    }else if(sinal != ''){
+                        sinal = this.textContent;
+                        telaSinal.textContent = sinal;
+                        num[0] = Number(telap.textContent);
+                        telap.textContent='0';
+                    }
+                    break;
+                case '=':
+                    telap.textContent = "" + operacao();
+                    telaSinal.textContent =` .`;
+                    sinal = '';
+                    break;
+                default:
+                    alert('Sem função!');
+            }
+        }
+        function operacao(){
+            resul=Number(telap.textContent);
+            switch(sinal){
+                case '+':
+                    resul += num[0];
+                    break;
+                case '-':
+                    resul -= num[0];
+                    break;
+                case 'x':
+                    resul *= num[0];
+                    break;
+                case '/':
+                    resul /= num[0];
+                    break;
+            }
+            return resul;
+        }
+    </script>
+</html>
