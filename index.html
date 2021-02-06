@@ -14,13 +14,19 @@
         width: 90%;
         size: 40%;
       }
-      nav *{
-        display: inline-flex;
+      nav{
+        display: flex;
+      }
+      nav ul{
+        display: flex;
+        flex: 4;
       }
       nav li{
         list-style-type: none;
       }
-      input{
+      nav input{
+        display: flex;
+        flex: 1;
         height: 44px;
       }
       header, article, aside, footer, nav, nav li{
@@ -32,7 +38,7 @@
         width: 90%;
       }
       article *{
-        width: 70%;
+        width: 50%;
       }
       aside{
         float: right;
